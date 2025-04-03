@@ -4,7 +4,7 @@ from openai import OpenAI
 import uuid
 from datetime import datetime
 from database.database import get_db
-from models.models import ChatMessage
+from model.model import ChatMessage
 
 import os
 from dotenv import load_dotenv

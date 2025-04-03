@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 from database.database import get_db
-from models.models import Patient, Doctor, ChatMessage
+from model.model import Patient, Doctor, ChatMessage
 from collections import defaultdict
 import uuid
 

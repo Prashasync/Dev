@@ -19,3 +19,4 @@ tensorflow==2.16.2
 openai==1.68.2
 apscheduler==3.11.0
 vaderSentiment==3.3.2
+uvicorn[standard] websockets==15.0.1

@@ -5,10 +5,15 @@ from datetime import datetime
 import uuid
 import requests
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
-from database.database import get_db
-from models.models import ChatMessage, EmotionAnalysis, Patient
-from config.settings import HF_API_URL, HF_API_KEY
+from database.database import get_db,SessionLocal
+from model.model import ChatMessage, EmotionAnalysis, Patient
+# from config.settings import HF_API_URL, HF_API_KEY
+import os
+from dotenv import load_dotenv
+load_dotenv()
 
+HF_API_URL = os.getenv("HF_API_URL")
+HF_API_KEY = os.getenv("HF_API_KEY")
 emotion_router = APIRouter()
 analyzer = SentimentIntensityAnalyzer()
 HEADERS = {"Authorization": f"Bearer {HF_API_KEY}"}
