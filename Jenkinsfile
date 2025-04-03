@@ -6,16 +6,10 @@ pipeline {
         string(name: 'AWS_ACCOUNT_ID', defaultValue: '463470954735', description: 'Enter AWS Account ID')
     }
     
-    tools {
-        jdk 'JDK'
-        nodejs 'NodeJS'
-        python 'Python3' // Add the tool for Python (make sure Python3 is installed in Jenkins)
-    }
-    
     environment {
         SCANNER_HOME = tool 'SonarQube Scanner'
-        PYTHON = 'python3' // Set python version
-        PIP = 'pip3'       // Set pip version
+        PYTHON = '/usr/bin/python3' // Reference the installed Python executable directly
+        PIP = '/usr/bin/pip3'        // Reference pip3 directly
     }
     
     stages {
@@ -47,7 +41,6 @@ pipeline {
             steps {
                 script {
                     echo 'Installing Python dependencies'
-                    // Ensure requirements.txt is available in the repository
                     sh """
                     ${PIP} install -r requirements.txt
                     """
@@ -59,7 +52,7 @@ pipeline {
             steps {
                 script {
                     echo 'Running Python tests'
-                    // Assuming you are using pytest for running tests
+                    // Run tests using pytest (or replace with unittest if desired)
                     sh """
                     ${PYTHON} -m pytest tests/
                     """
