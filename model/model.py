@@ -6,14 +6,7 @@ from sqlalchemy import (
 from sqlalchemy.orm import declarative_base, sessionmaker, relationship
 import enum
 
-# Database Connection
-DATABASE_URL = "postgresql://postgres:Prashaind2025@database-1.cyvysmg4w1i4.us-east-1.rds.amazonaws.com:5432/prasha_health"
 
-# Create Database Engine
-engine = create_engine(DATABASE_URL, connect_args={"check_same_thread": False})
-
-# Session
-SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 # Base Model
 Base = declarative_base()
