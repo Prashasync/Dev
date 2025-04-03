@@ -43,6 +43,8 @@ async def chat_with_ai(websocket: WebSocket, patient_id: str, db: Session = Depe
             db.commit()
 
             # ✅ AI Response
+            # This code snippet is using the OpenAI API to generate a response from a chatbot model.
+            # Here's a breakdown of what's happening:
             response = openai.chat.completions.create(
                 model="gpt-4o",
                 messages=[{"role": "system", "content": "You are a mental health assistant."}] + conversation_history,
