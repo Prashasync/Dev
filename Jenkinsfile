@@ -24,22 +24,20 @@ pipeline {
                 withSonarQubeEnv ('sonar-server') {
                     sh """
                     $SCANNER_HOME/bin/sonar-scanner \
-                    -Dsonar.projectName=MVP_PRODUCTION \
-                    -Dsonar.projectKey=MVP_PRODUCTION
+                    -Dsonar.projectName=mvp \
+                    -Dsonar.projectKey=prod
                     """
                 }
             }
         }
-
-
-
-        /*
+        
         stage('3. Quality Gate') {
             steps {
-                waitForQualityGate abortPipeline: false, credentialsId: 'sonar-token'
+                waitForQualityGate abortPipeline: false, 
+                credentialsId: 'sonar-token'
             }
         }
-        */
+        
             stage('4. Install Python Dependencies') {
             steps {
                 script {
