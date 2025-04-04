@@ -4,7 +4,6 @@ pipeline {
     parameters {
         string(name: 'ECR_REPO_NAME', defaultValue: 'amazon-prime', description: 'Enter repository name')
         string(name: 'AWS_ACCOUNT_ID', defaultValue: '463470954735', description: 'Enter AWS Account ID')
-        boolean runSonarQube = false  // Change to true when you want to enable it
     }
     
     environment {
