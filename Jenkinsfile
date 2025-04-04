@@ -59,7 +59,6 @@ pipeline {
                             . venv/bin/activate
                             pip install --upgrade pip
                             pip install -r requirements.txt
-                            pip list | grep pytest  # Verify pytest is installed
                             pytest tests/
                             """
                     }
