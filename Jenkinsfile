@@ -95,16 +95,17 @@ pipeline {
         
         stage('7. Build Docker Image') {
             steps {
-                script {
-                    if ("${params.ECR_REPO_NAME}".trim()) {
-                        echo "Building Docker image: ${params.ECR_REPO_NAME}"
-                        sh "sudo docker build -t ${params.ECR_REPO_NAME} ."
-                    } else {
-                        echo "Skipping Docker build: ECR_REPO_NAME is not set."
-                    }
+            script {
+            if ("${params.ECR_REPO_NAME}".trim()) {
+                echo "Building Docker image: ${params.ECR_REPO_NAME}"
+                sh "docker build -t ${params.ECR_REPO_NAME} ."
+            } else {
+                echo "Skipping Docker build: ECR_REPO_NAME is not set."
+            }
                 }
             }
         }
+
 
         
         stage('8. Create ECR repo') {
