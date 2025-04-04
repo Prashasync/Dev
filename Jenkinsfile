@@ -59,10 +59,10 @@ pipeline {
         
                     if (test_files.toInteger() > 0) {
                         echo 'Running Python tests'
-                        sh """
+                        sh '''
                             . venv/bin/activate
                             pytest tests/
-                        """
+                        '''
                     } else {
                         echo 'No tests found. Skipping pytest.'
                     }
