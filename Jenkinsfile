@@ -38,30 +38,30 @@ pipeline {
         }
         */
         stage('4. Install Python Dependencies') {
-    steps {
-        script {
-            echo 'Setting up Python virtual environment & installing dependencies'
-            sh """
-            python3 -m venv venv
-            . venv/bin/activate
-            pip install --upgrade pip
-            pip install -r requirements.txt
-            """
-        }
-    }
-}
+            steps {
+                script {
+                    echo 'Setting up Python virtual environment & installing dependencies'
+                        sh """
+                        python3 -m venv venv
+                        . venv/bin/activate
+                        pip install --upgrade pip
+                        pip install -r requirements.txt
+                        """
+                    }
+                }
+            }
 
-        stage('5. Run Tests') {
-    steps {
-        script {
-            echo 'Running Python tests'
-            sh """
-            source venv/bin/activate
-            python -m pytest tests/
-            """
-        }
-    }
-}
+            stage('5. Run Tests') {
+                steps {
+                    script {
+                        echo 'Running Python tests'
+                        sh """
+                        source venv/bin/activate
+                        python -m pytest tests/
+                        """
+                    }
+                }
+            }
 
         
         stage('6. Trivy Scan') {
