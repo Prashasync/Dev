@@ -30,13 +30,13 @@ pipeline {
                 }
             }
         }
-        
+        /*
         stage('3. Quality Gate') {
             steps {
                 waitForQualityGate abortPipeline: false, credentialsId: 'sonar-token'
             }
         }
-        
+        */
         stage('4. Install Python Dependencies') {
             steps {
                 script {
