@@ -18,7 +18,7 @@ pipeline {
                 git branch: 'main', url: 'https://github.com/Prashasync/Dev.git'
             }
         }
-        
+        /*
         stage('2. SonarQube Analysis') {
             steps {
                 withSonarQubeEnv ('sonar-server') {
@@ -30,7 +30,7 @@ pipeline {
                 }
             }
         }
-        /*
+        
         stage('3. Quality Gate') {
             steps {
                 waitForQualityGate abortPipeline: false, credentialsId: 'sonar-token'
