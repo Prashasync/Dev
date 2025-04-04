@@ -26,7 +26,6 @@ pipeline {
             $SCANNER_HOME/bin/sonar-scanner \
             -Dsonar.projectKey=MVP_PrashaSync \
             -Dsonar.projectName=MVP_PrashaSync \
-            -Dsonar.sources=src \
             -Dsonar.inclusions=**/*.py
             """
                 }
