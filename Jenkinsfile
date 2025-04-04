@@ -37,33 +37,39 @@ pipeline {
             }
         }
         */
-        stage('4. Install Python Dependencies') {
+            stage('4. Install Python Dependencies') {
             steps {
                 script {
                     echo 'Setting up Python virtual environment & installing dependencies'
-                        sh """
+                    sh """
                         python3 -m venv venv
                         . venv/bin/activate
                         pip install --upgrade pip
                         pip install -r requirements.txt
-                        """
-                    }
-                }
+                    """
             }
+        }
+    }
 
-            stage('5. Run Tests') {
-                steps {
-                    script {
+        stage('5. Run Tests') {
+            steps {
+                script {
+                    echo 'Checking if tests exist'
+                    def test_files = sh(script: "find tests/ -type f -name '*.py' | wc -l", returnStdout: true).trim()
+        
+                    if (test_files.toInteger() > 0) {
                         echo 'Running Python tests'
                         sh """
                             . venv/bin/activate
-                            pip install --upgrade pip
-                            pip install -r requirements.txt
                             pytest tests/
-                            """
+                        """
+                    } else {
+                        echo 'No tests found. Skipping pytest.'
                     }
                 }
             }
+        }
+
 
         
         stage('6. Trivy Scan') {
