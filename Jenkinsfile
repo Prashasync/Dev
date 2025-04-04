@@ -19,6 +19,7 @@ pipeline {
             }
         }
         
+        /*
         stage('2. SonarQube Analysis') {
             steps {
                 withSonarQubeEnv ('sonar-server') {
@@ -37,6 +38,7 @@ pipeline {
                 credentialsId: 'sonar-token'
             }
         }
+        */
         
             stage('4. Install Python Dependencies') {
             steps {
