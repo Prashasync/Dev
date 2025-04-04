@@ -20,16 +20,21 @@ pipeline {
         }
         
         stage('2. SonarQube Analysis') {
-            steps {
-                withSonarQubeEnv ('sonar-server') {
+        steps {
+            withSonarQubeEnv('sonar-server') {
+                script {
                     sh """
-                    $SCANNER_HOME/bin/sonar-scanner \
+                    ${env.SCANNER_HOME ?: '/opt/sonar-scanner'}/bin/sonar-scanner \
+                    -Dsonar.projectKey=MVP_PrashaSync \
                     -Dsonar.projectName=MVP_PrashaSync \
-                    -Dsonar.projectKey=MVP_PrashaSync
+                    -Dsonar.host.url=\${SONAR_HOST_URL} \
+                    -Dsonar.login=\${SONAR_AUTH_TOKEN}
                     """
+                }
                 }
             }
         }
+
 
         /*
         stage('3. Quality Gate') {
