@@ -77,14 +77,18 @@ pipeline {
                 script {
                     echo "Running Trivy vulnerability scan on Python dependencies"
         
-                    // Scan only dependencies, not full filesystem
-                    sh "trivy fs --scanners vuln --file-patterns '**/requirements.txt' --cache-dir /tmp/trivy-cache > trivy.txt"
-        
-                    // Optional: Fail pipeline on critical vulnerabilities
-                    sh "[ $(grep 'CRITICAL' trivy.txt | wc -l) -eq 0 ] || exit 1"
-                }
+                    // Scan only dependencies
+                sh """
+                trivy fs --scanners vuln --file-patterns "**/requirements.txt" --cache-dir /tmp/trivy-cache > trivy.txt
+                CRITICAL_COUNT=$(grep "CRITICAL" trivy.txt | wc -l || echo 0)
+                if [ "$CRITICAL_COUNT" -ne 0 ]; then
+                    echo "Critical vulnerabilities found! Failing pipeline."
+                    exit 1
+                fi
+            """
             }
         }
+    }
 
         
         stage('7. Build Docker Image') {
