@@ -20,14 +20,13 @@ pipeline {
         }
         
         stage('2. SonarQube Analysis') {
-    steps {
-        withSonarQubeEnv('sonar-server') {
-            sh """
-            $SCANNER_HOME/bin/sonar-scanner \
-            -Dsonar.projectKey=MVP_PrashaSync \
-            -Dsonar.projectName=MVP_PrashaSync \
-            -Dsonar.inclusions=**/*.py
-            """
+            steps {
+                withSonarQubeEnv ('sonar-server') {
+                    sh """
+                    $SCANNER_HOME/bin/sonar-scanner \
+                    -Dsonar.projectName=MVP_PRODUCTION \
+                    -Dsonar.projectKey=MVP_PRODUCTION
+                    """
                 }
             }
         }
