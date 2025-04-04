@@ -20,20 +20,24 @@ pipeline {
         }
         
         stage('2. SonarQube Analysis') {
-        steps {
+            steps {
             withSonarQubeEnv('sonar-server') {
-                script {
-                    sh """
-                    ${env.SCANNER_HOME ?: '/opt/sonar-scanner'}/bin/sonar-scanner \
-                    -Dsonar.projectKey=MVP_PrashaSync \
-                    -Dsonar.projectName=MVP_PrashaSync \
-                    -Dsonar.host.url=\${SONAR_HOST_URL} \
-                    -Dsonar.login=\${SONAR_AUTH_TOKEN}
-                    """
-                }
+            script {
+                // Increase Java heap space
+                env.SONAR_SCANNER_OPTS = "-Xmx2g"
+
+                sh """
+                ${env.SCANNER_HOME ?: '/opt/sonar-scanner'}/bin/sonar-scanner \
+                -Dsonar.projectKey=MVP_PrashaSync \
+                -Dsonar.projectName=MVP_PrashaSync \
+                -Dsonar.host.url=\${SONAR_HOST_URL} \
+                -Dsonar.login=\${SONAR_AUTH_TOKEN}
+                """
+            }
                 }
             }
         }
+
 
 
         /*
