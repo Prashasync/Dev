@@ -20,16 +20,19 @@ pipeline {
         }
         
         stage('2. SonarQube Analysis') {
-            steps {
-                withSonarQubeEnv ('sonar-server') {
-                    sh """
-                    $SCANNER_HOME/bin/sonar-scanner \
-                    -Dsonar.projectName=amazon-prime \
-                    -Dsonar.projectKey=amazon-prime
-                    """
+    steps {
+        withSonarQubeEnv('sonar-server') {
+            sh """
+            $SCANNER_HOME/bin/sonar-scanner \
+            -Dsonar.projectKey=MVP_PrashaSync \
+            -Dsonar.projectName=MVP_PrashaSync \
+            -Dsonar.sources=src \
+            -Dsonar.inclusions=**/*.py
+            """
                 }
             }
         }
+
 
 
         /*
