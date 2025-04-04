@@ -88,16 +88,24 @@ pipeline {
                     echo "Skipping failure for now and proceeding to the next stage."
                 fi
             '''
+                }
+            }
         }
-    }
-}
 
         
         stage('7. Build Docker Image') {
             steps {
-                sh "docker build -t ${params.ECR_REPO_NAME} ."
+                script {
+                    if ("${params.ECR_REPO_NAME}".trim()) {
+                        echo "Building Docker image: ${params.ECR_REPO_NAME}"
+                        sh "sudo docker build -t ${params.ECR_REPO_NAME} ."
+                    } else {
+                        echo "Skipping Docker build: ECR_REPO_NAME is not set."
+                    }
+                }
             }
         }
+
         
         stage('8. Create ECR repo') {
             steps {
