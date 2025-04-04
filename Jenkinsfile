@@ -56,9 +56,12 @@ pipeline {
                     script {
                         echo 'Running Python tests'
                         sh """
-                        . venv/bin/activate
-                        python -m pytest tests/
-                        """
+                            . venv/bin/activate
+                            pip install --upgrade pip
+                            pip install -r requirements.txt
+                            pip list | grep pytest  # Verify pytest is installed
+                            pytest tests/
+                            """
                     }
                 }
             }
