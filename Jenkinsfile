@@ -56,7 +56,7 @@ pipeline {
                     script {
                         echo 'Running Python tests'
                         sh """
-                        source venv/bin/activate
+                        . venv/bin/activate
                         python -m pytest tests/
                         """
                     }
